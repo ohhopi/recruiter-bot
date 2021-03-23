@@ -1,0 +1,15 @@
+{
+  "guildId": "812641818407731220",
+  "lRole": "chaos test role 1",
+  "emojis": {
+    "tank": "tank:818865684959723531",
+    "healer": "healer:818865739804835840",
+    "ranged": "ranged:818865808045244466",
+    "melee": "melee:818865778119802910",
+    "caster": "caster:818865830346489857",
+    "dps": "dps:818880657077436426",
+    "cancel": "cancel:818865860851531776",
+    "error": "error:822766302786748427",
+    "confirm": "confirm:822766328589844480"
+  }
+}

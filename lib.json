@@ -1,0 +1,20 @@
+{
+  "ownerId": "179631031337484288",
+  "prefix": "!cbr",
+  "roles": ["tank", "healer", "ranged", "melee", "caster", "dps"],
+  "msgs": {
+    "changeNickname": "Welcome to CBR!\nYour name doesn't follow the **[Server]FirstName LastName** format.\nYour role will not/cannot be updated when you're doing prog on this server if your nickname doesn't follow the rules as it also helps the Raid Leaders recognize you.\nYou can change your nickname as shown here: https://imgur.com/Qp1klAk\nThen head to #❗read-me-first❗\n\n**Fair Warning:** I will keep nagging until you change it :)",
+    "giveFFLogs": "I don't detect any FFlogs in your message. Please provide them as they are the only proof accepted by the raid leaders.",
+    "timeout": "DM answer timed out",
+    "cancel": "DM cancelled",
+    "askTitle": "**Party Title:**",
+    "askDescription": "**Party Description:**",
+    "askCoLeader": "**Co-leader:**\n\n **none** is a valid option",
+    "askDate": "**Event Date:**\n\nMust be in __\"dd-MM-yyyy hh:mm\"__ format.\n\n**Ex:** \"25-2-2021 19:00\", \"5-12-2021 9:15\", etc. All in ST/UTC/GMT +0\nI may be a bot but I also suck at timezones :P",
+    "askDur": "**Min/Max Duration: **\n\nMin Max\n**Ex 1: ** 1 2\n**Ex 2: ** 3 4",
+    "askComp": "**Party Comp:**\nWritten in the following order => TANKS HEALERS RANGED MELEES CASTERS ANY\n\n**Ex 1: ** 12 12 6 6 6 6 //Standard DRS\n**Ex 2: ** 1 3 3 3 3 11 //Speedrun DRN\n**Ex 3: ** 2 2 0 0 0 4 //Standard 8 Man Party",
+    "askReserves": "**Roles reserved for leaders:**\n\nMust be one line with each role separated by a space.\n**Roles:** tank, healer, melee, ranged, caster, dps.  [flex is written dps]\n\n**Ex:** \"healer\", \"healer tank tank\"",
+    "askAllowedRoles": "**Roles allowed to register in the event: **\n\nMust be in one line with each role separated by a comma\n**Ex 1:** AT KNIGHTS //One role, Not Case Sensitive\n**Ex 2:** at knights, at hot and cold //Multiple roles, Not Case Sensitive",
+    "askChannel": "**Announcement Channel:**"
+  }
+}

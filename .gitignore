@@ -1,0 +1,11 @@
+# Node Modules Stuff
+node_modules
+
+# dotenv Stuff
+.env
+
+# IDEA Stuff
+.idea
+
+# My Stuff
+data
