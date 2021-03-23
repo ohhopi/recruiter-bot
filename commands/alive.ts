@@ -7,7 +7,7 @@ import { emojis } from "../guild.json"
 export = class AliveCommand extends Command {
 
     aliases: string[] = ["alive"];
-    roles: string[] = [];
+    roles: string[] = null;
 
     handle(bot: Bot, message: Message, args: string[]) {
         message.react(`<:${emojis.confirm}>`).then();

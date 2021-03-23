@@ -8,7 +8,7 @@ import { createPartyReactionHandler } from "../../party/party-reactions";
 export = class RefreshCommand extends Command {
 
     aliases: string[] = ["refresh"];
-    roles: string[] = [null];
+    roles: string[] = [];
 
     handle(bot: Bot, message: Message, args: string[]) {
         if(args.length >= 1) {

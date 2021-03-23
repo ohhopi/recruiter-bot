@@ -7,7 +7,7 @@ import { emojis } from "../guild.json"
 export = class AnalCommand extends Command {
 
     aliases: string[] = ["anal"];
-    roles: string[] = [];
+    roles: string[] = null;
 
     async handle(bot: Bot, message: Message, args: string[]) {
         if(args.length > 2) {
