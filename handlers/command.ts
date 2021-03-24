@@ -29,10 +29,9 @@ class CommandHandler implements IMessageHandler {
         const command = this.commands.find(command => command.aliases.includes(com));
         if(command) {
             if(command.roles !== null) {
-                if(message.author.id !== ownerId) {
-                    const member = bot.guild.member(message.author);
-                    if(!member.roles.cache.some(r => command.roles.includes(r.name.toLowerCase()))) { return; }
-                    if(!member.hasPermission("ADMINISTRATOR")) { return; }
+                const member = bot.guild.member(message.author);
+                if(message.author.id !== ownerId && !member.hasPermission("ADMINISTRATOR")) {
+                    if(!member.roles.cache.some(r => command.roles.includes(r.id))) { return; }
                 }
             }
 
