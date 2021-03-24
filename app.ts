@@ -1,7 +1,6 @@
+import dotenv from "dotenv"; dotenv.config();
+
 import {NicknameNagger} from "./handlers/nickname-nagger";
-
-require("dotenv").config();
-
 import { Client, Message } from "discord.js";
 import { Bot } from "./bot";
 import { ClockUpdater } from "./handlers/clock";
