@@ -23,7 +23,8 @@ export = class UpcomingCommand extends Command {
             let hours = fixLeadingZero(Math.trunc(minsUntil(p.date) / S).toString(10));
             let mins = fixLeadingZero((minsUntil(p.date) % S).toString(10));
             str += `Starting in: ${hours}:${mins} - `;
-            str += `[${p.title}](https://discord.com/channels/${bot.guild.id}/${p.channelId}/${p.msgId})\n`;
+            str += `[${p.title}](https://discord.com/channels/${bot.guild.id}/${p.channelId}/${p.msgId}) - `;
+            str += `${p.members.length} / ${p.comp.max}\n`;
         })
         embed.setDescription(str);
 
