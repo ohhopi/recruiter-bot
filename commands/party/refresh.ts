@@ -4,6 +4,7 @@ import { Message } from "discord.js";
 
 import { emojis } from "../../guild.json";
 import { createPartyReactionHandler } from "../../party/party-reactions";
+import {updatePartyMsg} from "../../party/party-utils";
 
 export = class RefreshCommand extends Command {
 
@@ -14,7 +15,7 @@ export = class RefreshCommand extends Command {
         if(args.length >= 1) {
             const party = bot.parties.all().find(party => party.id === args[0]);
             if(party !== undefined) {
-                createPartyReactionHandler(bot, party);
+                updatePartyMsg(bot, party);
                 message.react(`<:${emojis.confirm}>`).then();
                 return;
             }
