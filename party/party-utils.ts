@@ -49,7 +49,7 @@ export function buildPartyEmbed(party: Party): MessageEmbed {
         } else {
             footer += `Starting In ${countdown % 60} Minutes`;
         }
-    } else if(countdown >= -party.dur.max * S) {
+    } else if(countdown > -party.dur.max * S) {
         embed.setColor("YELLOW");
         footer = `Has been running for ${-countdown}`;
     } else {
