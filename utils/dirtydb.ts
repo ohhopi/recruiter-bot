@@ -15,8 +15,10 @@ export class DirtyDB<T extends IDirty> {
         this.replacer = options.replacer;
         initDir(this.dir);
         fs.readdirSync(this.dir).forEach(file => {
-            let data = JSON.parse(fs.readFileSync(path.join(this.dir, file), "utf8"), this.reviver);
-            this.entries.push({ data: data, hash: ohash(data), delete: false });
+            if(file.endsWith(".json")) {
+                let data = JSON.parse(fs.readFileSync(path.join(this.dir, file), "utf8"), this.reviver);
+                this.entries.push({ data: data, hash: ohash(data), delete: false });
+            }
         });
     }
 
@@ -43,7 +45,9 @@ export class DirtyDB<T extends IDirty> {
         fs.writeFileSync(path.join(this.dir, `${data.id}.json`), JSON.stringify(data, this.replacer, 2));
     }
 
-    private _delete(data: T) { fs.unlinkSync(path.join(this.dir, `${data.id}.json`)); }
+    private _delete(data: T) {
+        fs.renameSync(path.join(this.dir, `${data.id}.json`), path.join(this.dir, "trash",`${data.id}.json`));
+    }
 
     public persist() {
         let del = this.entries.filter(entry => entry.delete);
@@ -67,9 +71,12 @@ function shash(str: string) { return createHash("md5").update(str).digest("hex")
 
 function ohash(obj: any) { return shash(JSON.stringify(obj)); }
 
-function initDir(path: string) {
-    if(!fs.existsSync(path)) {
-        fs.mkdirSync(path, { recursive: true });
+function initDir(dir: string) {
+    if(!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+    }
+    if(!fs.existsSync(path.join(dir, "trash"))) {
+        fs.mkdirSync(path.join(dir, "trash"), { recursive: true });
     }
 }
 
