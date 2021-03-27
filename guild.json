@@ -1,6 +1,11 @@
 {
   "guildId": "812641818407731220",
   "lRole": "chaos test role 1",
+  "pRoles": [
+    { "rank": 1, "name":  "ctr 1"},
+    { "rank": 2, "name":  "ctr 2"},
+    { "rank": 3, "name":  "ctr 3"}
+  ],
   "emojis": {
     "tank": "tank:818865684959723531",
     "healer": "healer:818865739804835840",
