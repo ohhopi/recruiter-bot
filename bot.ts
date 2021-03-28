@@ -18,10 +18,13 @@ export class Bot {
     tickHandlers: ITickHandler[] = [];
     msgHandlers: IMessageHandler[] = [];
 
+    dataDir: string;
+
     constructor(client: Client) {
         this.client = client;
-        this.parties = new DirtyDB({ dir: path.join(__dirname, "data/parties"), reviver: Party.reviver });
-        this.schedules = new DirtyDB({ dir: path.join(__dirname, "data/schedules"), reviver: Schedule.reviver });
+        this.dataDir = path.join(__dirname, "data");
+        this.parties = new DirtyDB({ dir: path.join(this.dataDir, "parties"), reviver: Party.reviver });
+        this.schedules = new DirtyDB({ dir: path.join(this.dataDir, "schedules"), reviver: Schedule.reviver });
     }
 
     public fixPartyReactions() {

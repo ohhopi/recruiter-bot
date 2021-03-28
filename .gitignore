@@ -10,3 +10,4 @@ node_modules
 # My Stuff
 data
 dist
+commands/ocr.ts
