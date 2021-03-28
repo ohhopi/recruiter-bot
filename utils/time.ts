@@ -16,6 +16,18 @@ export function toFormattedTimeStr(date: Date): string  {
     return hours + ":" + mins;
 }
 
+export function toFormattedCountdownStr(countdown: number): string  {
+    let str;
+    if(countdown >= 60) {
+        let hours = fixLeadingZero(Math.trunc(countdown / 60).toString());
+        let mins = fixLeadingZero((countdown % 60).toString());
+        str = `${hours}:${mins} Hours`;
+    } else {
+        str = `${countdown % 60} Minutes`;
+    }
+    return str;
+}
+
 export function fixLeadingZero(str: string) { return (str.length === 1) ? "0" + str : str; }
 
 export const dateRegx = /(0*\d|[12]\d|3[01])-(0*\d|1[012])-(\d\d\d\d)\s(0*\d|1\d|2[0123]):([012345]\d)/;

@@ -1,7 +1,14 @@
 import { MessageEmbed, TextChannel } from "discord.js";
 import { Bot } from "../bot";
 import { Party } from "./party";
-import { fixLeadingZero, minsUntil, S, toFormattedDateStr, toFormattedTimeStr } from "../utils/time";
+import {
+    fixLeadingZero,
+    minsUntil,
+    S,
+    toFormattedCountdownStr,
+    toFormattedDateStr,
+    toFormattedTimeStr
+} from "../utils/time";
 import { toMiniNickname } from "../utils/nickname";
 
 import { roles } from "../lib.json";
@@ -42,16 +49,10 @@ export function buildPartyEmbed(party: Party): MessageEmbed {
     if(countdown > 0) {
         footer += `Open to: ${party.allowed.length !== 0 ? party.allowed.join(", ") : "No one apparently"}\n`;
         footer += `Min Duration ${party.dur.min} - Max Duration ${party.dur.max} - `
-        if(countdown >= 60) {
-            let hours = fixLeadingZero(Math.trunc(countdown / 60).toString());
-            let mins = fixLeadingZero((countdown % 60).toString());
-            footer += `Starting In ${hours}:${mins} Hours`;
-        } else {
-            footer += `Starting In ${countdown % 60} Minutes`;
-        }
+        footer += `Starting In ${toFormattedCountdownStr(countdown)}`;
     } else if(countdown > -party.dur.max * S) {
         embed.setColor("YELLOW");
-        footer = `Has been running for ${-countdown}`;
+        footer = `Has been running for ${toFormattedCountdownStr(-countdown)}`;
     } else {
         embed.setColor("RED");
         footer = "Closed"
