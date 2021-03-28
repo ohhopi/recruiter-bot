@@ -2,7 +2,7 @@ import { Command } from "../handlers/command";
 import { Bot } from "../bot";
 import { Message } from "discord.js";
 
-import { emojis, lRole, pRoles } from "../guild.json"
+import { emojis, gRole, pRoles } from "../guild.json"
 import {toMiniNickname} from "../utils/nickname";
 import logger from "../logger";
 import {askInDm, dm, dmError, getDmLock} from "../utils/dm";
@@ -12,7 +12,7 @@ import {updatePartyMsg} from "../party/party-utils";
 export = class DemoteCommand extends Command {
 
     aliases: string[] = ["demote"];
-    roles: string[] = [lRole];
+    roles: string[] = [gRole];
 
     async handle(bot: Bot, message: Message, args: string[]) {
         let fails: string[] = [];
@@ -36,11 +36,25 @@ export = class DemoteCommand extends Command {
                 } catch (e) { }
             });
 
+            let members = (await bot.guild.members.fetch()).array();
             if(reason !== null && log !== null) {
                 for(let arg of args) {
                     try {
-                        let member = bot.guild.members.cache.find(gm =>  toMiniNickname(gm.displayName).toLowerCase().includes(arg));
+                        let member = members.find(gm =>  toMiniNickname(gm.displayName).toLowerCase().includes(arg));
                         if(member) {
+                            let shouldDemote = true;
+                            for(let r of member.roles.cache.array()) {
+                                for(let pr of pRoles) {
+                                    if(pr.name.includes(r.name.toLowerCase())) {
+                                        if(pr.rank <= npRole.rank) {
+                                            fails.push(arg);
+                                            shouldDemote = false;
+                                        }
+                                    }
+                                }
+                            }
+
+                            if(!shouldDemote) { continue; }
                             await member.roles.remove(oRoles);
                             await member.roles.add(nRole);
                             let msg = msgs.demote
