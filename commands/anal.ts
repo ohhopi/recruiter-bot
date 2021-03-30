@@ -1,6 +1,7 @@
 import { Command } from "../handlers/command";
 import { Bot } from "../bot";
 import {GuildChannel, Message, Role, TextChannel} from "discord.js";
+import Table from "easy-table";
 
 import { emojis } from "../guild.json"
 
@@ -44,13 +45,14 @@ export = class AnalCommand extends Command {
                         }
                     }
 
+                    let table = new Table();
                     let txt = "";
                     for(let [k1, v1] of Object.entries(anals)) {
-                        txt += `**"${k1}" Breakdown**\n`;
+                        table.cell("Reaction", `${k1}`);
                         for(let [k2, v2] of Object.entries(v1)) {
-                            txt += `From ${k2}: ${v2}\n`;
+                            table.cell(k2, v2);
                         }
-                        txt += "\n";
+                        table.newRow();
                     }
 
                     let roleUnique = new Set();
@@ -60,7 +62,7 @@ export = class AnalCommand extends Command {
                     }
                     txt += `${roleUnique.size} Unique Reaction(s) out of ${uniques.all.size} Total Unique Reaction(s)`;
 
-                    message.channel.send(txt).then();
+                    message.channel.send(`\`\`\`\n${table.toString()}\n\`\`\`\n${txt}`).then();
                     return;
                 }
             }
