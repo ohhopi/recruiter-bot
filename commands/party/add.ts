@@ -6,6 +6,7 @@ import { registerInParty } from "../../party/party-reactions";
 
 import { lRole, emojis } from "../../guild.json";
 import { roles } from "../../lib.json";
+import {toMiniNickname} from "../../utils/nickname";
 
 export = class AddCommand extends Command {
 
@@ -20,7 +21,7 @@ export = class AddCommand extends Command {
                     let role = args[1].toLowerCase();
                     if(roles.includes(role)) {
                         let playa = args.slice(2).join(" ").toLowerCase().trim();
-                        let gm = bot.guild.members.cache.find(gm => gm.displayName.toLowerCase().includes(playa));
+                        let gm = bot.guild.members.cache.find(gm => toMiniNickname(gm.displayName).toLowerCase().includes(playa));
                         if(gm) {
                             if(registerInParty(party, gm, role)) {
                                 updatePartyMsg(bot, party);

@@ -6,6 +6,7 @@ import {kickFromParty, updatePartyMsg} from "../../party/party-utils";
 import { lRole, emojis } from "../../guild.json";
 import {dm, dmError, isGuildRole} from "../../utils/dm";
 import {unregisterFromParty} from "../../party/party-reactions";
+import {toMiniNickname} from "../../utils/nickname";
 
 export = class KickCommand extends Command {
 
@@ -18,7 +19,7 @@ export = class KickCommand extends Command {
             if(party !== undefined) {
                 if(args.length > 1) {
                     let playa = args.slice(1).join(" ").toLowerCase().trim();
-                    let gm = bot.guild.members.cache.find(gm => gm.displayName.toLowerCase().includes(playa));
+                    let gm = bot.guild.members.cache.find(gm => toMiniNickname(gm.displayName).toLowerCase().includes(playa));
                     if(gm) {
                         if(unregisterFromParty(party, gm, false)) {
                             updatePartyMsg(bot, party);
