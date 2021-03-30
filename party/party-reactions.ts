@@ -4,7 +4,7 @@ import {Party} from "./party";
 import {GuildMember, MessageReaction, TextChannel, User} from "discord.js";
 import {dm, dmError} from "../utils/dm";
 import {isValidNickname} from "../utils/nickname";
-import {emojis} from "../guild.json";
+import {emojis,lRole} from "../guild.json";
 import {updatePartyMsg} from "./party-utils";
 
 declare module "discord.js" {
@@ -56,8 +56,10 @@ export function registerInParty(party: Party, gm: GuildMember, role: string) {
     }
 
     if(!gm.roles.cache.some(role => party.allowed.includes(role.name.toLowerCase().trim()))) {
-        dmError(gm.user, `Incorrect role to register in the "${party.title}" party`);
-        return false;
+        if(!gm.roles.cache.some(r => lRole.includes(r.name.toLowerCase()))){
+            dmError(gm.user, `Incorrect role to register in the "${party.title}" party`);
+            return false;
+        }
     }
 
     if(!isValidNickname(gm.displayName)) {
