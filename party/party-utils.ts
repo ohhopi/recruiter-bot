@@ -2,7 +2,6 @@ import { MessageEmbed, TextChannel } from "discord.js";
 import { Bot } from "../bot";
 import { Party } from "./party";
 import {
-    fixLeadingZero,
     minsUntil,
     S,
     toFormattedCountdownStr,
@@ -48,6 +47,14 @@ export function buildPartyEmbed(party: Party): MessageEmbed {
     let countdown = minsUntil(party.date);
     if(countdown > 0) {
         footer += `Open to: ${party.allowed.length !== 0 ? party.allowed.join(", ") : "No one apparently"}\n`;
+
+        if(party.lockouts !== undefined && party.lockouts.length !== 0) {
+            for(let lockout of party.lockouts) {
+                let countdown = lockout.start !== null ? minsUntil(lockout.start) : 0;
+                footer += `Open in ${toFormattedCountdownStr(lockout.dur + countdown)} to: ${lockout.roles.join(", ")}\n`;
+            }
+        }
+
         footer += `Min Duration ${party.dur.min} - Max Duration ${party.dur.max} - `
         footer += `Starting In ${toFormattedCountdownStr(countdown)}`;
     } else if(countdown > -party.dur.max * S) {
@@ -103,6 +110,10 @@ export function startParty(bot: Bot, party: Party) {
         let ping = pings.map(r => `${r}`).join(" ");
         channel.send(ping).then(async message => {
             party.msgId = message.id;
+
+            let now = new Date();
+            party.lockouts.forEach(l => l.start = now);
+
             message.edit("", buildPartyEmbed(party)).then();
 
             for (const role of roles) {

@@ -8,15 +8,17 @@ export class Party implements IDirty {
     date: Date = null;
     leader: { id: string, name: string } = null;
     coleader: { id: string, name: string } = null;
-    dur: { min: number, max: number } = {min: 2, max: 3 };
+    dur: { min: number, max: number } = { min: 2, max: 3 };
     comp: { max: number, tank: number, healer: number, ranged: number, melee: number, caster: number, dps: number } = Party.COMPS.DRS1;
     allowed: string[] = [];
     members: { id: string, name: string, role: string }[] = [];
     forfeits: { id: string, name: string, role: string }[] = [];
 
-    msgId: string = null;
     channelId: string = null;
+    msgId: string = null;
     pw: string = undefined;
+
+    lockouts: { start: Date, dur: number, roles: string[] } [] = [];
 
     public static readonly COMPS = {
         DRS1: { max: 48, tank: 12, healer: 12, ranged: 6, melee: 6, caster: 6, dps: 6  },
