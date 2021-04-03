@@ -1,10 +1,13 @@
 {
   "guildId": "812641818407731220",
-  "lRole": "chaos test role 1",
+  "lRole": "ctr 1",
+  "gRole": "ctr 4",
+  "hRole": "ctr 3",
   "pRoles": [
     { "rank": 1, "name":  "ctr 1"},
     { "rank": 2, "name":  "ctr 2"},
-    { "rank": 3, "name":  "ctr 3"}
+    { "rank": 2, "name":  "ctr 3"},
+    { "rank": 3, "name":  "ctr 4"}
   ],
   "emojis": {
     "tank": "tank:818865684959723531",
@@ -15,6 +18,11 @@
     "dps": "dps:818880657077436426",
     "cancel": "cancel:818865860851531776",
     "error": "error:822766302786748427",
-    "confirm": "confirm:822766328589844480"
+    "confirm": "confirm:822766328589844480",
+    "dust": "dust:827827099799912459",
+    "thunder": "thunder:827828003492593664",
+    "wind": "wind:827828031430197258",
+    "rain": "rain:827828045938163723",
+    "fair": "fair:827828058126811136"
   }
 }
