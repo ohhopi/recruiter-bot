@@ -42,7 +42,7 @@ export function askInDm(user: User, dm: string, validator: ((name: string) => bo
     }
     return new Promise<string>((resolve, reject) => {
         user.send(new MessageEmbed().setColor("GREEN").setDescription(dm)).then(msg => {
-            msg.channel.awaitMessages(filter, { max: 1, time: WAIT, errors: ["time" ] }).then(collected => {
+            msg.channel.awaitMessages(filter, { max: 1, time: WAIT, errors: ["time"] }).then(collected => {
                 const msg = collected.first();
                 if(msg.content.toLowerCase() === "cancel") {
                     user.send(new MessageEmbed().setColor("RED").setDescription(msgs.cancel)).then();
