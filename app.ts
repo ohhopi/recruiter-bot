@@ -7,6 +7,7 @@ import { ClockUpdater } from "./handlers/clock";
 import { PartyCleaner } from "./handlers/party-cleaner";
 import { Scheduler } from "./handlers/scheduler";
 import { CommandHandler } from "./handlers/command";
+import { RoleRequestMod } from "./handlers/role-request-mod";
 
 import logger from "./logger";
 import { guildId } from "./guild.json"
@@ -21,6 +22,7 @@ client.once("ready", async () => {
     bot.registerTickHandler(new Scheduler());
     bot.registerMessageHandler(new CommandHandler());
     bot.registerMessageHandler(new NicknameNagger());
+    bot.registerMessageHandler(new RoleRequestMod());
 
     client.on("message", (message: Message) => { bot.onMessage(message); });
 
