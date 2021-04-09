@@ -1,6 +1,6 @@
 import { Command } from "../handlers/command";
 import { Bot } from "../bot";
-import {GuildChannel, Message, Role, TextChannel} from "discord.js";
+import {GuildChannel, Message, MessageReaction, Role, TextChannel, User} from "discord.js";
 
 import { emojis } from "../guild.json"
 
@@ -19,7 +19,7 @@ export = class ReactionsCommand extends Command {
 
                     let reactions = msg.reactions.cache.array();
                     for(let reaction of reactions) {
-                        let users = (await reaction.users.fetch()).array();
+                        let users = await getAllMsgReactions(reaction);
                         for(let user of users) { uniques.add(user.id); }
                     }
 
@@ -31,4 +31,21 @@ export = class ReactionsCommand extends Command {
         message.react(`<:${emojis.error}>`).then();
     }
 
+}
+
+async function getAllMsgReactions(reaction: MessageReaction, startId: string = null): Promise<User[]> {
+    let users: User[] = [];
+    let req;
+    if(startId === null) {
+        req = await reaction.users.fetch();
+    } else {
+        req = await reaction.users.fetch({ after: startId });
+    }
+
+    users.push(...req.values());
+    if(req.size === 100) {
+        users.push(...(await getAllMsgReactions(reaction, users[users.length - 1].id)));
+    }
+
+    return users;
 }

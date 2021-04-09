@@ -1,6 +1,6 @@
 import { Command } from "../handlers/command";
 import { Bot } from "../bot";
-import {GuildChannel, Message, Role, TextChannel} from "discord.js";
+import {GuildChannel, Message, MessageReaction, Role, TextChannel, User} from "discord.js";
 import Table from "easy-table";
 
 import { emojis } from "../guild.json"
@@ -32,16 +32,16 @@ export = class AnalCommand extends Command {
                         for(let role of roles) { anals[reaction.emoji.name][role] = 0; }
 
 
-                        let users = (await reaction.users.fetch()).array();
+                        let users = await getAllMsgReactions(reaction);
                         for(let user of users) {
                             if(user.bot) { continue; }
+                            uniques.all.add(user.id);
                             let member = bot.guild.member(user);
                             if(!member) { continue; }
                             member.roles.cache.filter(r => roles.includes(r.name.toLowerCase())).forEach(r => {
                                 anals[reaction.emoji.name][r.name.toLowerCase()]++;
                                 uniques[r.name.toLowerCase()].add(user.id);
                             });
-                            uniques.all.add(user.id);
                         }
                     }
 
@@ -70,4 +70,21 @@ export = class AnalCommand extends Command {
         message.react(`<:${emojis.error}>`).then();
     }
 
+}
+
+async function getAllMsgReactions(reaction: MessageReaction, startId: string = null): Promise<User[]> {
+    let users: User[] = [];
+    let req;
+    if(startId === null) {
+        req = await reaction.users.fetch();
+    } else {
+        req = await reaction.users.fetch({ after: startId });
+    }
+
+    users.push(...req.values());
+    if(req.size === 100) {
+        users.push(...(await getAllMsgReactions(reaction, users[users.length - 1].id)));
+    }
+
+    return users;
 }
