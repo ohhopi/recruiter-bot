@@ -3,6 +3,7 @@
   "lRole": "ctr 1",
   "gRole": "ctr 4",
   "hRole": "ctr 3",
+  "rRole": "ctr 4",
   "pRoles": [
     { "rank": 1, "name":  "ctr 1"},
     { "rank": 2, "name":  "ctr 2"},

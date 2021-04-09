@@ -4,7 +4,7 @@ import {Party} from "./party";
 import {GuildMember, MessageReaction, TextChannel, User} from "discord.js";
 import {dm, dmError} from "../utils/dm";
 import {isValidNickname} from "../utils/nickname";
-import {emojis,lRole,hRole} from "../guild.json";
+import {emojis,lRole,hRole,rRole} from "../guild.json";
 import {updatePartyMsg} from "./party-utils";
 
 declare module "discord.js" {
@@ -60,6 +60,11 @@ export function registerInParty(party: Party, gm: GuildMember, role: string) {
             dmError(gm.user, `Incorrect role to register in the "${party.title}" party`);
             return false;
         }
+    }
+
+    if(gm.roles.cache.some(r => rRole === r.name.toLowerCase())) {
+        dmError(gm.user, `You are restricted from joining any parties`);
+        return false;
     }
 
     if(!isValidNickname(gm.displayName)) {
