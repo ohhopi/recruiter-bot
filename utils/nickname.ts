@@ -4,6 +4,6 @@ export function isValidNickname(inp: string): boolean {
 
 export function toMiniNickname(name: string): string {
     name = name.replace(/\[\w+]\s*/, match => "[" + match[1] + "]");
-    name = name.replace(/['"][\W\w\D\d\S\s]*['"]/, "").replace(/\s+/," ").trim();
+    name = name.replace(/['"][\w\s]*['"]/, "").replace(/\s+/," ").trim();
     return name;
 }
