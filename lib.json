@@ -1,9 +1,10 @@
 {
-  "ownerId": "179631031337484288",
-  "prefix": "!cbr",
+  "ownerId": "93393303789109248",
+  "prefix": "!r",
+  "log_prefix": "r",
   "roles": ["tank", "healer", "ranged", "melee", "caster", "dps"],
   "msgs": {
-    "changeNickname": "Welcome to CBR!\nYour name doesn't follow the **[Server]FirstName LastName** format.\nYour role will not/cannot be updated when you're doing prog on this server if your nickname doesn't follow the rules as it also helps the Raid Leaders recognize you.\nYou can change your nickname as shown here: https://imgur.com/Qp1klAk\nThen head to #❗read-me-first❗\n\n**Fair Warning:** I will keep nagging until you change it :)",
+    "changeNickname": "Your name doesn't follow the **[Server]FirstName LastName** format.\nYour role will not/cannot be updated when you're doing prog on this server if your nickname doesn't follow the rules as it also helps the Raid Leaders recognize you.\nYou can change your nickname as shown here: https://imgur.com/Qp1klAk\nThen head to #❗read-me-first❗\n\n**Fair Warning:** I will keep nagging until you change it :)",
     "giveFFLogs": "I don't detect any FFlogs in your message. Please provide them as they are the only proof accepted by the raid leaders.",
     "timeout": "DM answer timed out",
     "cancel": "DM cancelled",
@@ -18,6 +19,7 @@
     "askChannel": "**Announcement Channel:**",
     "askReason": "**Reason for Demotion:**",
     "askLog": "**Run's Log:**",
-    "demote": "Hello,\n\nFollowing a recent run, we've reviewed your case and because of performance issues during the run, we've ultimately taken the decision to demote you from your current role and lower it to ${role}.\n\n**Reason:**\n${reason}\n\n**Run's Log:** ${log}\n\nThis demotion is non-negotiable, you may move back up the ladder by joining the according prog/kill runs.\nIf you have any questions relating to the run, please contact the RL's who can provide you with Logs.\nApologies for any inconvenience caused,\n\nCBR DRS Raid Leaders"
+    "demote": "Hello,\n\nFollowing a recent run, we've reviewed your case and because of performance issues during the run, we've ultimately taken the decision to demote you from your current role and lower it to ${role}.\n\n**Reason:**\n${reason}\n\n**Run's Log:** ${log}\n\nThis demotion is non-negotiable, you may move back up the ladder by joining the according prog/kill runs.\nIf you have any questions relating to the run, please contact the RL's who can provide you with Logs.\nApologies for any inconvenience caused,\n\nCBR DRS Raid Leaders",
+    "about" : "Go read the wiki : https://github.com/MasterAbdoTGM50/chaos-bozjan-recruiter/wiki"
   }
 }

@@ -1,9 +1,9 @@
 {
-  "guildId": "819683426273329182",
-  "gRole": "Savage",
-  "lRole": "Savage",
-  "hRole": "Savage",
-  "rRole": "Savage",
+  "guildId": "826863024883105792",
+  "gRole": "administrator",
+  "lRole": "administrator",
+  "hRole": "administrator",
+  "rRole": "administrator",
   "pRoles": [
     { "rank": 1, "name":  "ctr 1"},
     { "rank": 2, "name":  "ctr 2"},

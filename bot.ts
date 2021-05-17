@@ -7,12 +7,15 @@ import { createPartyReactionHandler } from "./party/party-reactions";
 import {Schedule} from "./party/schedule";
 
 import path from "path";
+import { Poll } from "./poll/poll";
+import { createPollReactionHandler } from "./poll/poll-reactions";
 
 export class Bot {
 
     client: Client;
     guild: Guild;
     parties: DirtyDB<Party>;
+    polls: DirtyDB<Poll>;
     schedules: DirtyDB<Schedule>;
 
     tickHandlers: ITickHandler[] = [];
@@ -24,11 +27,16 @@ export class Bot {
         this.client = client;
         this.dataDir = path.join(__dirname, "data");
         this.parties = new DirtyDB({ dir: path.join(this.dataDir, "parties"), reviver: Party.reviver });
+        this.polls = new DirtyDB({ dir: path.join(this.dataDir, "polls"), reviver: Poll.reviver });
         this.schedules = new DirtyDB({ dir: path.join(this.dataDir, "schedules"), reviver: Schedule.reviver });
     }
 
     public fixPartyReactions() {
         for(const party of this.parties.all()) { createPartyReactionHandler(this, party); }
+    }
+
+    public fixPollReactions() {
+        for(const poll of this.polls.all()) { createPollReactionHandler(this, poll); }
     }
 
     public tick() {

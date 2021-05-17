@@ -6,6 +6,7 @@ import {dm, dmError} from "../utils/dm";
 import {isValidNickname} from "../utils/nickname";
 import {emojis,lRole,hRole,rRole} from "../guild.json";
 import {updatePartyMsg} from "./party-utils";
+import logger from "../logger";
 
 declare module "discord.js" {
     export interface ReactionCollector {
@@ -33,6 +34,16 @@ export function createPartyReactionHandler(bot: Bot, party: Party) {
                         unregisterFromParty(party, member, true);
                     }
                     updatePartyMsg(bot, party);
+                    if (bot.guild.me.hasPermission("MANAGE_MESSAGES")) {
+                        const userReactions = msg.reactions.cache.filter(reaction => reaction.users.cache.has(member.id));
+                        try {
+                            for (const reaction of userReactions.values()) {
+                                await reaction.users.remove(member.id);
+                            }
+                        } catch (error) {
+                            logger.error(`Failed to remove reaction for ${member.id} on party ${party.id}`);
+                        }
+                    }
                 })
             });
 

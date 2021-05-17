@@ -5,9 +5,9 @@ import {GuildChannel, Message, TextChannel} from "discord.js";
 import { lRole, emojis } from "../../guild.json";
 import {startParty} from "../../party/party-utils";
 
-export = class AnnounceCommand extends Command {
+export = class PartyAnnounceCommand extends Command {
 
-    aliases: string[] = ["announce"];
+    aliases: string[] = ["party-announce"];
     roles: string[] = [lRole];
 
     async handle(bot: Bot, message: Message, args: string[]) {

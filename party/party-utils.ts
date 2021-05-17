@@ -19,8 +19,7 @@ export function buildPartyEmbed(party: Party): MessageEmbed {
 
     embed.setTitle(party.title);
 
-    let desc = `ID: ${party.id}\n`;
-    desc += `Leader: ${party.leader.name}\n`;
+    let desc = `Leader: ${party.leader.name}\n`;
     desc += `Co-leader: ${party.coleader !== null ? party.coleader.name : "None"}\n\n${party.description}`;
     embed.setDescription(desc);
 
@@ -33,7 +32,7 @@ export function buildPartyEmbed(party: Party): MessageEmbed {
         let registered = 0;
         let members = "";
         party.members.filter(member => member.role === role).forEach(member => {
-            members += `<:${emojis[role]}> ${toMiniNickname(member.name)}\n`;
+            members += `${toMiniNickname(member.name)}\n`;
             ++registered;
         });
         if(registered === 0) { members = "Empty"; }
@@ -56,7 +55,8 @@ export function buildPartyEmbed(party: Party): MessageEmbed {
         }
 
         footer += `Min Duration ${party.dur.min} - Max Duration ${party.dur.max} - `
-        footer += `Starting In ${toFormattedCountdownStr(countdown)}`;
+        footer += `Starting In ${toFormattedCountdownStr(countdown)}\n`;
+        footer += `ID: ${party.id}`;
     } else if(countdown > -party.dur.max * S) {
         embed.setColor("YELLOW");
         footer = `Has been running for ${toFormattedCountdownStr(-countdown)}`;

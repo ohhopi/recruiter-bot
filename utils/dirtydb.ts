@@ -2,6 +2,7 @@ import { createHash } from "crypto";
 import fs from "fs";
 import path from "path";
 import { MS, S } from "./time";
+import { v4 as uuidv4 } from 'uuid';
 
 export class DirtyDB<T extends IDirty> {
     private readonly dir: string;
@@ -81,7 +82,5 @@ function initDir(dir: string) {
 }
 
 export function genId(): string {
-    const now = new Date()
-    const utcSinceEpoch = now.getTime() + (now.getTimezoneOffset() * S * MS)
-    return Math.round(utcSinceEpoch / MS).toString();
+    return uuidv4();
 }

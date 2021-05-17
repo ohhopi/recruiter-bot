@@ -16,20 +16,25 @@ const client = new Client();
 const bot = new Bot(client);
 
 client.once("ready", async () => {
-    bot.guild = await client.guilds.fetch(guildId);
+    logger.info (await client.guilds)
+    // bot.guild = await client.guilds.fetch(guildId);
     bot.registerTickHandler(new ClockUpdater());
     bot.registerTickHandler(new PartyCleaner());
     bot.registerTickHandler(new Scheduler());
     bot.registerMessageHandler(new CommandHandler());
-    bot.registerMessageHandler(new NicknameNagger());
+    // bot.registerMessageHandler(new NicknameNagger());
     bot.registerMessageHandler(new RoleRequestMod());
 
-    client.on("message", (message: Message) => { bot.onMessage(message); });
+    client.on("message", (message: Message) => { 
+        bot.onMessage(message); 
+    });
 
     bot.tick();
     bot.fixPartyReactions();
+    bot.fixPollReactions();
 
-    logger.info("Chaos Bozjan Recruiter! Ready for Action!!!");
+    logger.info("Recruiter! Ready for Action.");
+
 });
 
 client.login(process.env.DSCRD_CBR_TOKEN).then();

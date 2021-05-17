@@ -6,7 +6,7 @@ import Table from "easy-table";
 import { emojis } from "../guild.json"
 
 export = class AnalCommand extends Command {
-
+  
     aliases: string[] = ["anal"];
     roles: string[] = null;
 
@@ -67,6 +67,7 @@ export = class AnalCommand extends Command {
                 }
             }
         }
+        // message.reply(new MessageEmbed().setColor("GREEN").setDescription("I'm here bro")).then();
         message.react(`<:${emojis.error}>`).then();
     }
 
